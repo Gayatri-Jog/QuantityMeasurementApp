@@ -1,3 +1,6 @@
+# Ignore the target/ directory and all its contents
+target/
+
 # Compiled class file
 *.class
 
