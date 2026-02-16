@@ -15,10 +15,6 @@ public class Length {
         LengthUnit(double conversionFactor) {
             this.conversionFactor = conversionFactor;
         }
-
-        public double getConversionFactor() {
-            return conversionFactor;
-        }
     }
 
     public Length(double value, LengthUnit lengthUnit) {
@@ -26,26 +22,26 @@ public class Length {
         this.lengthUnit = lengthUnit;
     }
 
-    private double convertToBaseUnit(LengthUnit lengthUnit, double value){
-        if(lengthUnit.equals(LengthUnit.INCHES)) {
-            return value / LengthUnit.FEET.getConversionFactor();
-        }else{
-            return value * LengthUnit.FEET.getConversionFactor();
-        }
+    private double convertToBaseUnit(){
+        return value * lengthUnit.conversionFactor;
     }
 
     @Override
     public boolean equals(Object o) {
-        if(o==null || getClass() != o.getClass()){
+        if (o == null || getClass() != o.getClass()){
             return false;
         }
         Length length = (Length) o;
-        if(!length.lengthUnit.equals(lengthUnit)){
-            return Double.compare(value, convertToBaseUnit(length.lengthUnit,
-                    length.value))==0;
+        if(!lengthUnit.equals(((Length) o).lengthUnit)){
+            return compare(length);
         }
         return Double.compare(value, length.value) == 0;
     }
+
+    private boolean compare(Length length){
+        return Double.compare(convertToBaseUnit(), length.convertToBaseUnit()) == 0;
+    }
+
 
     public static void demonstrateFeetEquality(){
         Length feet1 = new Length(1.2, LengthUnit.FEET);
