@@ -67,4 +67,23 @@ public class Length {
         System.out.print("Result for inches3 and inches4: "+inches3.equals(inches4)+"\n");
     }
 
+    public static void demonstrateFeetInchesComparison(){
+        Length length1 = new Length(12, LengthUnit.INCHES);
+        Length length2 = new Length(1, LengthUnit.FEET);
+        printData(length1,length2);
+
+        Length length3 = new Length(2, LengthUnit.FEET);
+        Length length4 = new Length(24, LengthUnit.INCHES);
+        printData(length3,length4);
+
+        Length length5 = new Length(13, LengthUnit.INCHES);
+        Length length6 = new Length(13, LengthUnit.FEET);
+        printData(length5,length6);
+    }
+
+    private static void printData(Length length1, Length length2){
+        System.out.print("Result for "+length1.value+" "+length1.lengthUnit+
+                " = "+length2.value+" "+length2.lengthUnit +" : "
+                +length1.equals(length2)+"\n");
+    }
 }
